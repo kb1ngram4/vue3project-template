@@ -1,5 +1,10 @@
 # vue3project-template
 
+## 简介
+```
+基于vue3.0脚手架
+```
+
 ## Project setup
 ```
 yarn install
