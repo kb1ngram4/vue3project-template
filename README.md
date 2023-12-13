@@ -4,7 +4,10 @@
 ```
 基于vue3.0脚手架
 ```
-
+### axios配置（二次封装）
+```
+yarn add axios
+```
 ## Project setup
 ```
 yarn install
