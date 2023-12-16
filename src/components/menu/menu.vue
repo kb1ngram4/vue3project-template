@@ -11,21 +11,6 @@
         </template>
       </el-menu-item>
     </template>
-    <!-- 子组件有1个 -->
-    <template v-if="item.children && item.children.length == 1">
-      <el-menu-item
-        :index="item.children[0].path"
-        v-if="item.children[0].meta.show"
-        @click="goRoute"
-      >
-        <el-icon>
-          <component :is="item.children[0].meta.icon"></component>
-        </el-icon>
-        <template #title>
-          <span>{{ item.children[0].meta.title }}</span>
-        </template>
-      </el-menu-item>
-    </template>
     <!-- 多个子路由 -->
     <el-sub-menu
       :index="item.path"
@@ -39,6 +24,18 @@
       </template>
       <!-- 递归展示子路由 -->
       <!-- <Menu :menuList="item.children"></Menu> -->
+      <el-menu-item-group>
+        <template v-for="_item in item.children" :key="_item.path" >
+          <el-menu-item :index="_item.path" @click="goRoute">
+            <el-icon>
+              <component :is="_item.meta.icon"></component>
+            </el-icon>
+            <template #title>
+              <span>{{_item.meta.title}}</span>
+            </template>
+          </el-menu-item>
+        </template>
+      </el-menu-item-group>
     </el-sub-menu>
   </template>
 </template>
@@ -56,6 +53,7 @@ import {useRouter} from 'vue-router'
 defineProps(["menuList"]);
 let $router = useRouter()
 const goRoute = (vc) => {
+  console.log('123',vc);
   $router.push(vc.index)
 }
 </script>

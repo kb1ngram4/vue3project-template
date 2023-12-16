@@ -20,7 +20,7 @@ const routes = [
         },
         children: [
             {
-                path: '/carRecord', 
+                path: '/carmanage/carRecord', 
                 name: '车辆档案', 
                 meta: {
                     title: '车辆档案',
@@ -30,7 +30,7 @@ const routes = [
                 component: () => import('../views/CarManage/CarRecord.vue')
             },
             {
-                path: '/carMonitor', name: '车辆监控', meta: {
+                path: '/carmanage/carMonitor', name: '车辆监控', meta: {
                     title: '车辆监控',
                     show: true,
                     icon: 'location'
