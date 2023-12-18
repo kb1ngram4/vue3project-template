@@ -1,6 +1,15 @@
 import Home from '../views/Home.vue'
 const routes = [
     {
+        path:'/login',
+        name:'login',
+        component:()=> import ('../views/login.vue'),
+        meta:{
+            title:'登录',
+            icon:''
+        }
+    },
+    {
         path: '/',
         name: 'home',
         component: Home,

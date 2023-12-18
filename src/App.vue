@@ -1,6 +1,7 @@
 <template>
   <div class="common-layout">
-    <el-container>
+    <!-- 菜单 -->
+    <el-container v-if="state.showMenu">
       <!-- side -->
       <el-aside :width="toggleStore.isCollapse?'60px':'200px'" :class="toggleStore.isCollapse?'.el-side-c':'el-side-o'">
         <div class="logo" v-if="!toggleStore.isCollapse">
@@ -18,6 +19,7 @@
           :default-active="$route.path"
           class="el-menu-vertical-demo"
           :collapse="toggleStore.isCollapse"
+          unique-opened
         >
           <Menu :menuList="menuStore.menuRoutes"></Menu>
         </el-menu>
@@ -36,16 +38,33 @@
         </el-main>
       </el-container>
     </el-container>
+    <!-- 登录页 -->
+    <el-container v-else>
+      <el-main>
+          <router-view />
+        </el-main>
+    </el-container>
   </div>
 </template>
 <script setup>
 import useMenuStore from "@/store/modules/menu";
 import useToggleCollapse from "@/store/modules/menuToggle";
 import Menu from "@/components/menu/menu.vue";
+import {reactive} from 'vue'
 import logo from '@/assets/logo.png'
+import router from "./router";
 let menuStore = useMenuStore();
 const toggleStore = useToggleCollapse();
 // const {isCollapse} = toggleStore
+let white = ['/login']
+let state = reactive({
+  showMenu:true
+})
+router.afterEach((to,from)=>{
+  console.log(to.path);
+  state.showMenu = !white.includes(to.path)
+  console.log('stateshowmenu',state.showMenu);
+})
 const handleSwitch = () => {
   toggleStore.$patch({
     isCollapse: !toggleStore.isCollapse,
