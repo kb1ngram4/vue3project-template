@@ -10,6 +10,25 @@ const routes = [
         }
     },
     {
+        path:'/register',
+        name:'register',
+        component:()=> import ('../views/register.vue'),
+        meta:{
+            title:'注册',
+            icon:''
+        }
+    },
+    {
+        path:'/forgetpassword',
+        name:'forgetpassword',
+        component:()=> import ('../views/forgetPassword.vue'),
+        meta:{
+            title:'忘记密码',
+            icon:''
+        }
+    },
+
+    {
         path: '/',
         name: 'home',
         component: Home,

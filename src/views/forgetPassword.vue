@@ -11,29 +11,29 @@
               <el-form-item>
                 <el-input size="large" v-model="form.num" placeholder="账号" />
               </el-form-item>
-              <el-form-item v-if="false">
-                <el-input size="large" v-model="form.auth" placeholder="验证码" />
+              <el-form-item >
+                <el-input size="large" v-model="form.auth" placeholder="验证码" class="auth-input" />
+                <el-button type="primary" size="large" style="width:25%">发送</el-button>
               </el-form-item>
               <el-form-item>
                 <el-input size="large" v-model="form.pwd" placeholder="密码" />
+                <!-- <el-input size="large" v-model="form.pwd" placeholder="密码" /> -->
               </el-form-item>
               <el-form-item>
                 <el-button size="large" class="btn d-pointer " type="primary" @click="onSubmit">
                   <el-icon style="vertical-align: middle">
                     <Right />
                   </el-icon>
-                  <span>登入</span>
+                  <span>重置密码</span>
                 </el-button>
-                <!-- <el-button>Cancel</el-button> -->
               </el-form-item>
             </el-form>
           </div>
         </el-col>
       </el-row>
       <div class="login-footer clearfix">
-        <span @click="handleRegister" class="d-pointer" >注册</span>
-        <el-divider direction="vertical"></el-divider>
-        <span class="d-pointer" @click="forgetPwd">忘记密码</span>
+        <span @click="goback" class="d-pointer" >返回登入</span>
+        <!-- <el-divider direction="vertical"></el-divider> -->
         <span class="fr d-pointer ">
           <el-icon style="vertical-align: middle">
             <MoreFilled />
@@ -56,17 +56,13 @@ const form = reactive({
   auth: "",
 });
 const onSubmit = () => {
-  console.log("登录");
+  console.log("注册");
   // localSet('login_token','dsakldasd')
   // window.location.href = '/'
 };
-const handleRegister = () =>{
-  console.log('register');
-  router.push('/register')
-}
-const forgetPwd = () =>{
-  console.log('forgetPwd');
-  router.push('/forgetpassword')
+const goback = () =>{
+  console.log('返回登入');
+  router.push('/login')
 }
 </script>
 <style scoped>
@@ -102,6 +98,10 @@ const forgetPwd = () =>{
 }
 :deep(.el-input__wrapper){
   background: #f0f3f8;
+}
+.auth-input{
+  width: 72%;
+  margin-right: 3%;
 }
 .el-input{
   border: 1px solid #f0f3f8;

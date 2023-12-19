@@ -39,7 +39,7 @@
       </el-container>
     </el-container>
     <!-- 登录页 -->
-    <el-container v-else>
+    <el-container class="login-con" v-else>
       <el-main>
           <router-view />
         </el-main>
@@ -56,7 +56,7 @@ import router from "./router";
 let menuStore = useMenuStore();
 const toggleStore = useToggleCollapse();
 // const {isCollapse} = toggleStore
-let white = ['/login']
+let white = ['/login','/register','/forgetpassword']
 let state = reactive({
   showMenu:true
 })
@@ -81,6 +81,9 @@ const handleSwitch = () => {
 }
 .common-layout{
   height: 100%;
+}
+.login-con{
+  background: #E8EAF2;
 }
 .el-container{
   height: 100%;

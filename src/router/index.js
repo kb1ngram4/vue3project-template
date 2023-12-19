@@ -20,7 +20,7 @@ function localGet (key) {
 }
 const white = ['login']
 router.beforeEach((to,from,next)=>{
-  if(to.path == '/login'){
+  if(to.path == '/login' || to.path == '/register' || to.path == '/forgetpassword'){
     next()
   }else{
     console.log('22222');
@@ -29,6 +29,7 @@ router.beforeEach((to,from,next)=>{
     }else{
       next()
     }
+    
   }
 })
 export default router
