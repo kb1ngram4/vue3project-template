@@ -3,13 +3,16 @@
     <!-- 菜单 -->
     <el-container v-if="state.showMenu">
       <!-- side -->
-      <el-aside :width="toggleStore.isCollapse?'60px':'200px'" :class="toggleStore.isCollapse?'.el-side-c':'el-side-o'">
+      <el-aside
+        :width="toggleStore.isCollapse ? '60px' : '200px'"
+        :class="toggleStore.isCollapse ? '.el-side-c' : 'el-side-o'"
+      >
         <div class="logo" v-if="!toggleStore.isCollapse">
-          <img :src="logo" alt="" class="logo-img" >
+          <img :src="logo" alt="" class="logo-img" />
           <span>新能源汽车</span>
         </div>
-        <div v-else class="unlogo" >
-          <img :src="logo" alt="" class="logo-img" >
+        <div v-else class="unlogo">
+          <img :src="logo" alt="" class="logo-img" />
         </div>
         <!-- 菜单 -->
         <el-menu
@@ -25,13 +28,14 @@
         </el-menu>
       </el-aside>
       <el-container>
-        <el-header class="navbar" height="50px" >
+        <el-header class="navbar" height="50px">
           <div class="switch" @click="handleSwitch">
-          <el-icon :size="30">
-            <Fold v-if="!toggleStore.isCollapse" />
-            <Expand v-else />
-          </el-icon>
-        </div>
+            <el-icon :size="30">
+              <Fold v-if="!toggleStore.isCollapse" />
+              <Expand v-else />
+            </el-icon>
+          </div>
+          <Header />
         </el-header>
         <el-main>
           <router-view />
@@ -41,8 +45,8 @@
     <!-- 登录页 -->
     <el-container class="login-con" v-else>
       <el-main>
-          <router-view />
-        </el-main>
+        <router-view />
+      </el-main>
     </el-container>
   </div>
 </template>
@@ -50,21 +54,26 @@
 import useMenuStore from "@/store/modules/menu";
 import useToggleCollapse from "@/store/modules/menuToggle";
 import Menu from "@/components/menu/menu.vue";
-import {reactive} from 'vue'
-import logo from '@/assets/logo.png'
+import Header from '@/components/header/index.vue'
+import { onBeforeUnmount, reactive } from "vue";
+import logo from "@/assets/logo.png";
 import router from "./router";
+import {localRemove} from './utils/index'
+// onBeforeUnmount(()=>{
+//   localRemove('login_token')
+// })
 let menuStore = useMenuStore();
 const toggleStore = useToggleCollapse();
 // const {isCollapse} = toggleStore
-let white = ['/login','/register','/forgetpassword']
+let white = ["/login", "/register", "/forgetpassword"];
 let state = reactive({
-  showMenu:true
-})
-router.afterEach((to,from)=>{
+  showMenu: true,
+});
+router.afterEach((to, from) => {
   console.log(to.path);
-  state.showMenu = !white.includes(to.path)
-  console.log('stateshowmenu',state.showMenu);
-})
+  state.showMenu = !white.includes(to.path);
+  console.log("stateshowmenu", state.showMenu);
+});
 const handleSwitch = () => {
   toggleStore.$patch({
     isCollapse: !toggleStore.isCollapse,
@@ -79,20 +88,20 @@ const handleSwitch = () => {
   text-align: center;
   color: #2c3e50;
 }
-.common-layout{
+.common-layout {
   height: 100%;
 }
-.login-con{
-  background: #E8EAF2;
+.login-con {
+  background: #e8eaf2;
 }
-.el-container{
+.el-container {
   height: 100%;
 }
-.el-side-c{
+.el-side-c {
   width: 60px;
   transition: 1s;
 }
-.el-side-o{
+.el-side-o {
   width: 200px;
   transition: 1s;
 }
@@ -108,7 +117,7 @@ const handleSwitch = () => {
   background: #001529;
   color: #fff;
 }
-.logo-img{
+.logo-img {
   width: 30px;
   height: 30px;
   vertical-align: middle;

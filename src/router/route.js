@@ -46,6 +46,7 @@ const routes = [
             show: true,
             icon: 'location'
         },
+        redirect: '/carmanage/carRecord',
         children: [
             {
                 path: '/carmanage/carRecord', 
@@ -56,25 +57,6 @@ const routes = [
                     icon: 'location'
                 }, 
                 component: () => import('../views/CarManage/CarRecord.vue'),
-                children: [
-                    {
-                        path: '/carmanage/carRecord', 
-                        name: '车辆档案', 
-                        meta: {
-                            title: '车辆档案',
-                            show: true,
-                            icon: 'location'
-                        }, 
-                        component: () => import('../views/CarManage/CarRecord.vue')
-                    },
-                    {
-                        path: '/carmanage/carMonitor', name: '车辆监控', meta: {
-                            title: '车辆监控',
-                            show: true,
-                            icon: 'location'
-                        }, component: () => import('../views/CarManage/CarMonitor.vue')
-                    },
-                ]
             },
             {
                 path: '/carmanage/carMonitor', name: '车辆监控', meta: {

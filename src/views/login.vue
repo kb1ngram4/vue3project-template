@@ -9,16 +9,18 @@
             </div>
             <el-form>
               <el-form-item>
-                <el-input size="large" v-model="form.num" placeholder="账号" />
-              </el-form-item>
-              <el-form-item v-if="false">
-                <el-input size="large" v-model="form.auth" placeholder="验证码" />
+                <el-input size="large" v-model="form.username" placeholder="用户名" />
               </el-form-item>
               <el-form-item>
-                <el-input size="large" v-model="form.pwd" placeholder="密码" />
+                <el-input size="large" v-model="form.password" placeholder="密码" />
               </el-form-item>
               <el-form-item>
-                <el-button size="large" class="btn d-pointer " type="primary" @click="onSubmit">
+                <el-button
+                  size="large"
+                  class="btn d-pointer"
+                  type="primary"
+                  @click="onSubmit"
+                >
                   <el-icon style="vertical-align: middle">
                     <Right />
                   </el-icon>
@@ -31,10 +33,10 @@
         </el-col>
       </el-row>
       <div class="login-footer clearfix">
-        <span @click="handleRegister" class="d-pointer" >注册</span>
+        <span @click="handleRegister" class="d-pointer">注册</span>
         <el-divider direction="vertical"></el-divider>
         <span class="d-pointer" @click="forgetPwd">忘记密码</span>
-        <span class="fr d-pointer ">
+        <span class="fr d-pointer">
           <el-icon style="vertical-align: middle">
             <MoreFilled />
           </el-icon>
@@ -46,28 +48,42 @@
 </template>
 <script setup>
 import router from "@/router";
-import { reactive } from "vue";
-function localSet(key, value) {
-  window.localStorage.setItem(key, JSON.stringify(value));
-}
+import { ElMessage } from "element-plus";
+import { getCurrentInstance, reactive } from "vue";
+import {localSet} from '@/utils/index'
 const form = reactive({
-  num: "",
-  pwd: "",
+  username: "",
+  password: "",
   auth: "",
 });
+const {proxy} = getCurrentInstance(); 
 const onSubmit = () => {
   console.log("登录");
-  // localSet('login_token','dsakldasd')
-  // window.location.href = '/'
+  localSet("login_token", "dsakldasd");
+  proxy
+    .$axios({
+      url: "/api/login",
+      method: "post",
+      data:form
+    })
+    .then((res) => {
+      console.log('res',res);
+      if(res.code == 200){
+        
+        window.location.href = '/'
+      }
+      
+    });
+  
 };
-const handleRegister = () =>{
-  console.log('register');
-  router.push('/register')
-}
-const forgetPwd = () =>{
-  console.log('forgetPwd');
-  router.push('/forgetpassword')
-}
+const handleRegister = () => {
+  console.log("register");
+  router.push("/register");
+};
+const forgetPwd = () => {
+  console.log("forgetPwd");
+  router.push("/forgetpassword");
+};
 </script>
 <style scoped>
 .login {
@@ -85,7 +101,7 @@ const forgetPwd = () =>{
   background: #fff;
 }
 .block-content {
-    padding: 1.5rem 1.5rem 0 1.5rem;
+  padding: 1.5rem 1.5rem 0 1.5rem;
 }
 .title {
   font-size: 26px;
@@ -96,14 +112,14 @@ const forgetPwd = () =>{
   /* padding: 0 1.5rem; */
   margin-bottom: 1.25rem;
 }
-:deep(.el-input__inner::placeholder){
+:deep(.el-input__inner::placeholder) {
   font-size: 16px;
-  color: #6C757D;
+  color: #6c757d;
 }
-:deep(.el-input__wrapper){
+:deep(.el-input__wrapper) {
   background: #f0f3f8;
 }
-.el-input{
+.el-input {
   border: 1px solid #f0f3f8;
 }
 .btn {
@@ -113,7 +129,7 @@ const forgetPwd = () =>{
 .login-footer {
   text-align: left;
   padding: 1rem 1.5rem;
-  background: #f8f9fa!important;
+  background: #f8f9fa !important;
 }
 .clearfix:after {
   content: "";
@@ -123,7 +139,7 @@ const forgetPwd = () =>{
 .fr {
   float: right;
 }
-.d-pointer{
+.d-pointer {
   cursor: pointer;
 }
 </style>

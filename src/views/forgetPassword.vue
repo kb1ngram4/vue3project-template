@@ -9,14 +9,14 @@
             </div>
             <el-form>
               <el-form-item>
-                <el-input size="large" v-model="form.num" placeholder="账号" />
+                <el-input size="large" v-model="form.username" placeholder="用户名" />
               </el-form-item>
               <el-form-item >
                 <el-input size="large" v-model="form.auth" placeholder="验证码" class="auth-input" />
                 <el-button type="primary" size="large" style="width:25%">发送</el-button>
               </el-form-item>
               <el-form-item>
-                <el-input size="large" v-model="form.pwd" placeholder="密码" />
+                <el-input size="large" v-model="form.password" placeholder="密码" />
                 <!-- <el-input size="large" v-model="form.pwd" placeholder="密码" /> -->
               </el-form-item>
               <el-form-item>
@@ -51,8 +51,8 @@ function localSet(key, value) {
   window.localStorage.setItem(key, JSON.stringify(value));
 }
 const form = reactive({
-  num: "",
-  pwd: "",
+  username: "",
+  password: "",
   auth: "",
 });
 const onSubmit = () => {
